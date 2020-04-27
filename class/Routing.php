@@ -15,6 +15,8 @@ class Routing {
 	}
 
 	public static function getCallback($path, $method) {
+		if (!isset(Routing::$callbacks[$method])) return null;
+		if (!isset(Routing::$callbacks[$method][$path])) return null;
 		return Routing::$callbacks[$method][$path];
 	}
 
@@ -45,6 +47,8 @@ class ApiRouting {
 	}
 
 	public static function getCallback($path, $method) {
+		if (!isset(ApiRouting::$callbacks[$method])) return null;
+		if (!isset(ApiRouting::$callbacks[$method][$path])) return null;
 		return ApiRouting::$callbacks[$method][$path];
 	}
 

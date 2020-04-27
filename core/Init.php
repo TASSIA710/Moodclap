@@ -16,6 +16,7 @@ include($ROOT_PATH . 'class/Session.php');
 // Initialize
 Database::connect();
 Routing::initialize();
+ApiRouting::initialize();
 
 
 

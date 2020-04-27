@@ -3,6 +3,7 @@
 // in case PHP for some reason gets disabled or just stops working.
 $ROOT_PATH = '../';
 include($ROOT_PATH . 'core/Init.php');
+include($ROOT_PATH . 'endpoints/Main.php');
 return;
 ?> -->
 <!DOCTYPE html>
