@@ -1,14 +1,15 @@
 <?php
 
 // Load core
-include('Constants.php');
-include('../Configuration.php');
+include($ROOT_PATH . '/core/Constants.php');
+include($ROOT_PATH . 'Configuration.php');
 
 // Load classes
-include('../class/Cache.php');
-include('../class/Database.php');
-include('../class/Routing.php');
-include('../class/Session.php');
+include($ROOT_PATH . 'class/Cache.php');
+include($ROOT_PATH . 'class/Database.php');
+include($ROOT_PATH . 'class/Request.php');
+include($ROOT_PATH . 'class/Routing.php');
+include($ROOT_PATH . 'class/Session.php');
 
 
 
@@ -19,5 +20,5 @@ Routing::initialize();
 
 
 // Load the app
-include('../app/AppConfig.php');
-include('../app/AppCore.php');
+include($ROOT_PATH . 'app/AppConfig.php');
+include($ROOT_PATH . 'app/AppCore.php');

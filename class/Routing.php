@@ -19,11 +19,11 @@ class Routing {
 	}
 
 	public static function GET($path, $callback) {
-		register($path, 'GET', $callback);
+		Routing::register($path, 'GET', $callback);
 	}
 
 	public static function POST($path, $callback) {
-		register($path, 'POST', $callback);
+		Routing::register($path, 'POST', $callback);
 	}
 
 }
@@ -49,11 +49,11 @@ class ApiRouting {
 	}
 
 	public static function GET($path, $callback) {
-		register($path, 'GET', $callback);
+		ApiRouting::register($path, 'GET', $callback);
 	}
 
 	public static function POST($path, $callback) {
-		register($path, 'POST', $callback);
+		ApiRouting::register($path, 'POST', $callback);
 	}
 
 }
