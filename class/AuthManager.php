@@ -16,7 +16,7 @@ class AuthManager {
 
 		$session->setLastLogin(time());
 		$session->setLastIP($_SERVER['REMOTE_ADDR']);
-		
+
 		self::$currentSession = $session;
 		self::$currentUser = $account;
 	}
@@ -42,7 +42,17 @@ class AuthManager {
 	}
 
 	public static function login($username, $password) {
-		// TODO
+		$account = Database::getAccountByName($username);
+		if ($account == null) return false;
+
+		if (!password_verify($password, $account->getPassword())) return false;
+
+		$token = Utility::generateSessionToken();
+		$session = Database::createSession($token, $account->getID());
+
+		self::$currentUser = $account;
+		self::$currentSession = $session;
+		Cookies::setCookie('session', $token);
 	}
 
 	public static function logout() {

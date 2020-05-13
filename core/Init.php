@@ -11,6 +11,7 @@ include($ROOT_PATH . 'class/Cache.php');
 include($ROOT_PATH . 'class/Cookies.php');
 include($ROOT_PATH . 'class/Database.php');
 include($ROOT_PATH . 'class/Session.php');
+include($ROOT_PATH . 'class/Utility.php');
 
 
 

@@ -74,6 +74,15 @@ class Database {
 		return $session;
 	}
 
+	public static function createSession($token, $id) {
+		$session = new Session($token, $id, time(), $_SERVER['REMOTE_ADDR']);
+
+		$sql = 'INSERT INTO moodclap_sessions (Token, AccountID, LastLogin, LastIP) VALUES (?, ?, ?, ?);';
+		Database::prepare($sql, [$token, $id, $session->getLastLogin(), $session->getLastIP()]);
+
+		return $session;
+	}
+
 	public static function dropSession($token) {
 		$sql = 'DELETE FROM moodclap_sessions WHERE Token = ?;';
 		Database::prepare($sql, [$token]);
