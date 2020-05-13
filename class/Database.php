@@ -44,6 +44,17 @@ class Database {
 		self::$cachedAccounts[$id] = $account;
 		return $account;
 	}
+
+	public static function getAccountByName($name) {
+		$sql = 'SELECT * FROM moodclap_accounts WHERE Username = ?;';
+		$account = null;
+		foreach (Database::prepare($sql, [$id]) as $row) $account = $row;
+		if ($account == null) return null;
+
+		$account = Account::FromRow($account);
+		self::$cachedAccounts[$account->getID()] = $account;
+		return $account;
+	}
 	/* Accounts */
 
 
