@@ -39,7 +39,7 @@ class Session {
 		$this->lastLogin = $lastLogin;
 		if ($noUpdate) return;
 
-		$sql = 'UPDATE `moodclap_sessions` SET LastLogin = ? WHERE Token = ?;';
+		$sql = 'UPDATE moodclap_sessions SET LastLogin = ? WHERE Token = ?;';
 		Database::prepare($sql, [$lastLogin, $this->getToken()]);
 	}
 	/* Last Login */
@@ -55,9 +55,33 @@ class Session {
 		$this->lastIP = $lastIP;
 		if ($noUpdate) return;
 
-		$sql = 'UPDATE `moodclap_sessions` SET LastIP = ? WHERE Token = ?;';
+		$sql = 'UPDATE moodclap_sessions SET LastIP = ? WHERE Token = ?;';
 		Database::prepare($sql, [$lastIP, $this->getToken()]);
 	}
 	/* Last IP */
+
+
+
+	/* Push DB */
+	public function pushDB() {
+		$sql = 'UPDATE moodclap_sessions SET LastLogin = ?, LastIP = ? WHERE Token = ?;';
+		Database::prepare($sql, [$this->getLastLogin(), $this->getLastIP(), $this->getToken()]);
+	}
+	/* Push DB */
+
+
+
+	/* Pull DB */
+	public function pullDB() {
+		$sql = 'SELECT * FROM moodclap_sessions WHERE Token = ?;';
+		$session = null;
+		foreach (Database::prepare($sql, [$this->getToken()]) as $row) $session = $row;
+		if ($session == null) return false;
+
+		$this->setLastLogin($session['LastLogin'], true);
+		$this->setLastIP($session['LastIP'], true);
+		return true;
+	}
+	/* Pull DB */
 
 }
