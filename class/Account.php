@@ -30,4 +30,17 @@ class Account {
 	}
 	/* Push DB */
 
+
+
+	/* Pull DB */
+	public function pullDB() {
+		$sql = 'SELECT * FROM moodclap_accounts WHERE AccountID = ?;';
+		$account = null;
+		foreach (Database::prepare($sql, [$this->getID()]) as $row) $account = $row;
+		if ($account == null) return false;
+		
+		return true;
+	}
+	/* Pull DB */
+
 }
