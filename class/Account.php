@@ -21,4 +21,13 @@ class Account {
 	}
 	/* Generic */
 
+
+
+	/* Push DB */
+	public function pushDB() {
+		$sql = 'UPDATE moodclap_accounts SET WHERE AccountID = ?;';
+		Database::prepare($sql, [$this->getID()]);
+	}
+	/* Push DB */
+
 }
