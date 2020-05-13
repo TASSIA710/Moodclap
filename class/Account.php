@@ -1,16 +1,17 @@
 <?php
 
 class Account {
-	private $accountid, $username;
+	private $accountid, $username, $password;
 
 	/* Constructor */
-	public function __construct($accountid, $username) {
+	public function __construct($accountid, $username, $password) {
 		$this->accountid = $accountid;
 		$this->username = $username;
+		$this->password = $password;
 	}
 
 	public static function FromRow($row) {
-		return new Account($row['AccountID'], $row['Username']);
+		return new Account($row['AccountID'], $row['Username'], $row['Password']);
 	}
 	/* Constructor */
 
@@ -37,6 +38,23 @@ class Account {
 		Database::prepare($sql, [$username, $this->getID()]);
 	}
 	/* Username */
+
+
+
+	/* Password */
+	public function getPassword() {
+		return $this->password;
+	}
+
+	public function setPassword($password, $noUpdate = false) {
+		$password = password_hash($password, PASSWORD_DEFAULT);
+		$this->password = $password;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_accounts SET Password = ? WHERE AccountID = ?;';
+		Database::prepare($sql, [$password, $this->getID()]);
+	}
+	/* Password */
 
 
 
