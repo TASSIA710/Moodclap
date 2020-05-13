@@ -18,6 +18,10 @@ class Database {
 		$q->execute($data);
 		return $q->fetchAll();
 	}
+
+	public static function lastInsert() {
+		return Database::$db->lastInsertId();
+	}
 	/* Generic */
 
 }
