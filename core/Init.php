@@ -7,16 +7,12 @@ include($ROOT_PATH . 'Configuration.php');
 // Load classes
 include($ROOT_PATH . 'class/Cache.php');
 include($ROOT_PATH . 'class/Database.php');
-include($ROOT_PATH . 'class/Request.php');
-include($ROOT_PATH . 'class/Routing.php');
 include($ROOT_PATH . 'class/Session.php');
 
 
 
 // Initialize
 Database::connect();
-Routing::initialize();
-ApiRouting::initialize();
 
 
 
