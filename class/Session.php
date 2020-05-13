@@ -26,6 +26,10 @@ class Session {
 	public function getAccountID() {
 		return $this->accountid;
 	}
+
+	public function getAccount() {
+		return Database::getAccount(self->getAccountID());
+	}
 	/* Generic */
 
 
