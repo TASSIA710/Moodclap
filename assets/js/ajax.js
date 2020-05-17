@@ -12,7 +12,7 @@ function launchAJAX(script, data, callback) {
 		}
 	};
 
-	xhttp.open('POST', '/api/' + script);
+	xhttp.open('POST', script);
 	xhttp.setRequestHeader('Content-Type', 'application/json');
 	xhttp.send(JSON.stringify(data));
 }
