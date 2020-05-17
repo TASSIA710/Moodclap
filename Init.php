@@ -7,6 +7,7 @@ include('Configuration.php');
 // Load classes
 include('class/Account.php');
 include('class/AuthManager.php');
+include('class/Breadcrumbs.php');
 include('class/Cache.php');
 include('class/Cookies.php');
 include('class/Database.php');
