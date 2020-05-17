@@ -10,7 +10,7 @@ const CONFIG = [
 
 	/* == -- Tokens -- == */
 	'token_session_length' =>	15,
-	'token_session_chars' =>	'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_',
+	'token_session_chars' =>	'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 	/* == -- Tokens -- == */
 
 
