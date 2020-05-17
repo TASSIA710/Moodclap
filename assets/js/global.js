@@ -33,3 +33,13 @@ function showAlertDanger(title, description) {
 	document.getElementById('error_container').innerHTML += html;
 }
 /* Show Alert */
+
+
+
+
+
+/* Remove Error Border */
+function removeErrorBorder(e) {
+	e.classList.remove('border-danger');
+}
+/* Remove Error Border */
