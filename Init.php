@@ -15,10 +15,9 @@ include('class/Session.php');
 include('class/Utility.php');
 
 
-
 // Initialize
 Database::connect();
-
+AuthManager::initialize();
 
 
 // Load the app
