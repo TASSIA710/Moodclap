@@ -8,7 +8,7 @@ function launchAJAX(script, data, callback) {
 		var res = xhttp.responseText;
 		if (xhttp.responseText.startsWith('{')) res = JSON.parse (xhttp.responseText);
 		if (!callback(res, xhttp.status, xhttp.statusText)) {
-			showAlertDanger('AJAX Error', 'Unexpected <code>' + xhttp.status + ' - ' + xhttp.statusText + '</code> @ <code>/api/' + script + '</code> | Please report this error.');
+			showAlertDanger('AJAX Error', 'Unexpected <code>' + xhttp.status + ' - ' + xhttp.statusText + '</code> @ <code>' + script + '</code> | Please report this error.');
 		}
 	};
 
