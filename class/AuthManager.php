@@ -53,6 +53,7 @@ class AuthManager {
 		self::$currentUser = $account;
 		self::$currentSession = $session;
 		Cookies::setCookie('session', $token);
+		return $token;
 	}
 
 	public static function logout() {
