@@ -65,4 +65,12 @@ class AuthManager {
 	}
 	/* Login & Logout */
 
+
+
+	/* Create Account */
+	public static function createAccount($username, $password) {
+		return Database::createAccount($username, password_hash($password, PASSWORD_DEFAULT));
+	}
+	/* Create Account */
+
 }

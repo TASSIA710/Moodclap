@@ -55,6 +55,12 @@ class Database {
 		self::$cachedAccounts[$account->getID()] = $account;
 		return $account;
 	}
+
+	public static function createAccount($username, $password) {
+		$sql = 'INSERT INTO moodclap_accounts (Username, Password) VALUES (?, ?);';
+		Database::prepare($sql, [$username, $password]);
+		return self::lastInsert();
+	}
 	/* Accounts */
 
 
