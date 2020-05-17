@@ -17,4 +17,16 @@ class Utility {
 	}
 	/* Generations */
 
+
+
+	/* String Utility */
+	public static function startsWith($str, $check) {
+		// TODO
+	}
+
+	public static function endsWith($str, $check) {
+		// TODO
+	}
+	/* String Utility */
+
 }
