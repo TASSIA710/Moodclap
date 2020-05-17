@@ -48,7 +48,7 @@ class Database {
 	public static function getAccountByName($name) {
 		$sql = 'SELECT * FROM moodclap_accounts WHERE Username = ?;';
 		$account = null;
-		foreach (Database::prepare($sql, [$id]) as $row) $account = $row;
+		foreach (Database::prepare($sql, [$name]) as $row) $account = $row;
 		if ($account == null) return null;
 
 		$account = Account::FromRow($account);
