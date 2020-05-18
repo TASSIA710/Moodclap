@@ -9,9 +9,9 @@ if (!file_exists($FILE_PATH) || !is_file($FILE_PATH)) {
 }
 
 
-if (Utility::endsWidth($FILE_PATH, '.css')) {
+if (Utility::endsWith($FILE_PATH, '.css')) {
 	header('Content-Type: text/css');
-} elseif (Utility::endsWidth($FILE_PATH, '.js')) {
+} elseif (Utility::endsWith($FILE_PATH, '.js')) {
 	header('Content-Type: text/javascript');
 }
 
