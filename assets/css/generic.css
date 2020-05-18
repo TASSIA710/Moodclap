@@ -1,11 +1,11 @@
 
 /* Underline */
 .underline {
-	text-decoration: underline;
+	text-decoration: underline !important;
 }
 
 .not-underline {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 /* Underline */
 
@@ -13,11 +13,11 @@
 
 /* Bold */
 .bold {
-	font-weight: bold;
+	font-weight: bold !important;
 }
 
 .not-bold {
-	font-weight: normal;
+	font-weight: normal !important;
 }
 /* Bold */
 
@@ -25,18 +25,18 @@
 
 /* Display */
 .display-none {
-	display: none;
+	display: none !important;
 }
 
 .display-block {
-	display: block;
+	display: block !important;
 }
 
 .display-inline {
-	display: inline;
+	display: inline !important;
 }
 
 .display-inline-block {
-	display: inline-block;
+	display: inline-block !important;
 }
 /* Display */
