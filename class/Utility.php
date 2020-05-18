@@ -19,6 +19,14 @@ class Utility {
 
 
 
+	/* Escape */
+	public static function escapeXSS($str) {
+		return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+	}
+	/* Escape */
+
+
+
 	/* String Utility */
 	public static function startsWith($str, $check) {
 		// TODO
