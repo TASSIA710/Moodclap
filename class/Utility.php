@@ -29,11 +29,12 @@ class Utility {
 
 	/* String Utility */
 	public static function startsWith($str, $check) {
-		// TODO
+		return substr($str, 0, strlen($check)) === $check;
 	}
 
 	public static function endsWith($str, $check) {
-		// TODO
+		if ($check === '') return true;
+		return substr($str, -strlen($check)) === $check;
 	}
 	/* String Utility */
 
