@@ -12,6 +12,7 @@ include('class/Cache.php');
 include('class/Cookies.php');
 include('class/Database.php');
 include('class/Group.php');
+include('class/Header.php');
 include('class/Session.php');
 include('class/Utility.php');
 
