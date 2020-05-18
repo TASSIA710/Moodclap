@@ -4,6 +4,7 @@ const CONFIG = [
 
 	/* == -- Generic -- == */
 	'cookie_duration' =>	60 * 60 * 24 * 30,
+	'cookie_domain' =>		'.localhost',
 	/* == -- Generic -- == */
 
 
