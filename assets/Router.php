@@ -1,5 +1,6 @@
 <?php
 
+include(__DIR__ . '/../class/Utility.php');
 $FILE_PATH = __DIR__ . '/' . $resource;
 
 if (!file_exists($FILE_PATH) || !is_file($FILE_PATH)) {
