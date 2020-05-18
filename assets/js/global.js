@@ -60,12 +60,11 @@ function isEmail(str) {
 
 
 /* Cookies */
-function setCookie(name, value, domain) {
+function setCookie(name, value) {
 	var d = new Date();
 	d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
 	var expires = 'expires=' + d.toUTCString();
-	if (domain) document.cookie = name + '=' + value + ';' + expires + ';path=/;domain=' + domain;
-	else document.cookie = name + '=' + value + ';' + expires + ';path=/';
+	document.cookie = name + '=' + value + ';' + expires + ';path=/';
 }
 
 function getCookie(name) {
