@@ -2,9 +2,9 @@
 
 class Cookies {
 
-	public static function setCookie($name, $value) {
+	public static function setCookie($name, $value, $domain = CONFIG['cookie_domain']) {
 		$_COOKIE[$name] = $value;
-		setcookie($name, $value, time() + CONFIG['cookie_duration'], '/', CONFIG['cookie_domain']);
+		setcookie($name, $value, time() + CONFIG['cookie_duration'], '/', $domain);
 	}
 
 	public static function removeCookie($name) {
