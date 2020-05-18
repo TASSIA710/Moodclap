@@ -7,10 +7,10 @@ class Cookies {
 		setcookie($name, $value, time() + CONFIG['cookie_duration'], '/', $domain);
 	}
 
-	public static function removeCookie($name) {
+	public static function removeCookie($name, $domain = CONFIG['cookie_domain']) {
 		if (isset($_COOKIE[$name])) {
 			unset($_COOKIE[$name]);
-			setcookie($name, '', time() - 3600);
+			setcookie($name, '', time() - 3600, '/', $domain);
 		}
 	}
 
