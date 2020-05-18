@@ -3,6 +3,7 @@
 class Database {
 	private static $cachedSessions = [];
 	private static $cachedAccounts = [];
+	private static $cachedGroups = [];
 	private static $db = null;
 
 
@@ -62,6 +63,24 @@ class Database {
 		return self::lastInsert();
 	}
 	/* Accounts */
+
+
+
+
+
+	/* Groups */
+	public static function getGroup($id) {
+		if (isset(self::$cachedGroups[$id])) return self::$cachedGroups[$id];
+		$sql = 'SELECT * FROM moodclap_sessions WHERE GroupID = ?;';
+		$group = null;
+		foreach (Database::prepare($sql, [$id]) as $row) $group = $row;
+		if ($group == null) return null;
+
+		$group = Group::FromRow($group);
+		self::$cachedGroups[$id] = $group;
+		return $group;
+	}
+	/* Groups */
 
 
 

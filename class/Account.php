@@ -1,17 +1,18 @@
 <?php
 
 class Account {
-	private $accountid, $username, $password;
+	private $accountid, $username, $password, $groupID;
 
 	/* Constructor */
-	public function __construct($accountid, $username, $password) {
+	public function __construct($accountid, $username, $password, $groupID) {
 		$this->accountid = $accountid;
 		$this->username = $username;
 		$this->password = $password;
+		$this->groupID = $groupID;
 	}
 
 	public static function FromRow($row) {
-		return new Account($row['AccountID'], $row['Username'], $row['Password']);
+		return new Account($row['AccountID'], $row['Username'], $row['Password'], $row['GroupID']);
 	}
 	/* Constructor */
 
@@ -58,10 +59,30 @@ class Account {
 
 
 
+	/* Group */
+	public function getGroupID() {
+		return $this->groupID;
+	}
+
+	public function getGroup() {
+		return Database::getGroup($this->getGroupID());
+	}
+
+	public function setGroupID($groupID) {
+		$this->groupID = $groupID;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_accounts SET GroupID = ? WHERE AccountID = ?;';
+		Database::prepare($sql, [$groupID, $this->getID()]);
+	}
+	/* Group */
+
+
+
 	/* Push DB */
 	public function pushDB() {
-		$sql = 'UPDATE moodclap_accounts SET WHERE AccountID = ?;';
-		Database::prepare($sql, [$this->getID()]);
+		$sql = 'UPDATE moodclap_accounts SET Username = ?, Password = ?, GroupID = ? WHERE AccountID = ?;';
+		Database::prepare($sql, [$this->getUsername(), $this->getPassword(), $this->getGroupID(), $this->getID()]);
 	}
 	/* Push DB */
 
@@ -74,6 +95,9 @@ class Account {
 		foreach (Database::prepare($sql, [$this->getID()]) as $row) $account = $row;
 		if ($account == null) return false;
 
+		$this->username = $account['Username'];
+		$this->password = $account['Password'];
+		$this->groupID = $account['GroupID'];
 		return true;
 	}
 	/* Pull DB */
