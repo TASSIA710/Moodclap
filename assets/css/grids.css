@@ -4,5 +4,5 @@
 }
 
 .grid.auto3 {
-	grid-template-columns: repeat(auto, 3);
+	grid-template-columns: repeat(3, auto);
 }
