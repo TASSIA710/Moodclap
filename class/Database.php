@@ -71,7 +71,7 @@ class Database {
 	/* Groups */
 	public static function getGroup($id) {
 		if (isset(self::$cachedGroups[$id])) return self::$cachedGroups[$id];
-		$sql = 'SELECT * FROM moodclap_sessions WHERE GroupID = ?;';
+		$sql = 'SELECT * FROM moodclap_groups WHERE GroupID = ?;';
 		$group = null;
 		foreach (Database::prepare($sql, [$id]) as $row) $group = $row;
 		if ($group == null) return null;
