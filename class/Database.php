@@ -80,6 +80,17 @@ class Database {
 		self::$cachedGroups[$id] = $group;
 		return $group;
 	}
+
+	public static function getAllGroups() {
+		$sql = 'SELECT * FROM moodclap_groups WHERE GroupID = ?;';
+		$list = [];
+		foreach (Database::query($sql) as $row) {
+			$group = Group::FromRow($row);
+			self::$cachedGroups[$group->getID()] = $group;
+			$list[count($list)] = $group;
+		}
+		return $list;
+	}
 	/* Groups */
 
 
