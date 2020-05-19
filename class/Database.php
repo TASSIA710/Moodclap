@@ -58,8 +58,8 @@ class Database {
 	}
 
 	public static function createAccount($username, $password) {
-		$sql = 'INSERT INTO moodclap_accounts (Username, Password) VALUES (?, ?);';
-		Database::prepare($sql, [$username, $password]);
+		$sql = 'INSERT INTO moodclap_accounts (Username, Password, FirstVisit, LastVisit) VALUES (?, ?, ?, ?);';
+		Database::prepare($sql, [$username, $password, time(), time()]);
 		return self::lastInsert();
 	}
 	/* Accounts */

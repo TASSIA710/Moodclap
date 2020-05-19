@@ -1,18 +1,20 @@
 <?php
 
 class Account {
-	private $accountid, $username, $password, $groupID;
+	private $accountid, $username, $password, $groupID, $firstVisit, $lastVisit;
 
 	/* Constructor */
-	public function __construct($accountid, $username, $password, $groupID) {
+	public function __construct($accountid, $username, $password, $groupID, $firstVisit, $lastVisit) {
 		$this->accountid = $accountid;
 		$this->username = $username;
 		$this->password = $password;
 		$this->groupID = $groupID;
+		$this->firstVisit = $firstVisit;
+		$this->lastVisit = $lastVisit;
 	}
 
 	public static function FromRow($row) {
-		return new Account($row['AccountID'], $row['Username'], $row['Password'], $row['GroupID']);
+		return new Account($row['AccountID'], $row['Username'], $row['Password'], $row['GroupID'], $row['FirstVisit'], $row['LastVisit']);
 	}
 	/* Constructor */
 
@@ -79,10 +81,43 @@ class Account {
 
 
 
+	/* First Visit */
+	public function getFirstVisit() {
+		return $this->firstVisit;
+	}
+
+	public function setFirstVisit($firstVisit, $noUpdate = false) {
+		$this->firstVisit = $firstVisit;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_accounts SET FirstVisit = ? WHERE AccountID = ?;';
+		Database::prepare($sql, [$firstVisit, $this->getID()]);
+	}
+	/* First Visit */
+
+
+
+	/* Last Visit */
+	public function getLastVisit() {
+		return $this->lastVisit;
+	}
+
+	public function setLastVisit($lastVisit, $noUpdate = false) {
+		$this->lastVisit = $lastVisit;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_accounts SET LastVisit = ? WHERE AccountID = ?;';
+		Database::prepare($sql, [$lastVisit, $this->getID()]);
+	}
+	/* Last Visit */
+
+
+
 	/* Push DB */
 	public function pushDB() {
-		$sql = 'UPDATE moodclap_accounts SET Username = ?, Password = ?, GroupID = ? WHERE AccountID = ?;';
-		Database::prepare($sql, [$this->getUsername(), $this->getPassword(), $this->getGroupID(), $this->getID()]);
+		$sql = 'UPDATE moodclap_accounts SET Username = ?, Password = ?, GroupID = ?, FirstVisit = ?, LastVisit = ? WHERE AccountID = ?;';
+		Database::prepare($sql, [$this->getUsername(), $this->getPassword(), $this->getGroupID(), $this->getFirstVisit(),
+				$this->getLastVisit(), $this->getID()]);
 	}
 	/* Push DB */
 
@@ -98,6 +133,8 @@ class Account {
 		$this->username = $account['Username'];
 		$this->password = $account['Password'];
 		$this->groupID = $account['GroupID'];
+		$this->firstVisit = $account['FirstVisit'];
+		$this->lastVisit = $account['LastVisit'];
 		return true;
 	}
 	/* Pull DB */

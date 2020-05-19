@@ -16,6 +16,7 @@ class AuthManager {
 
 		$session->setLastLogin(time());
 		$session->setLastIP($_SERVER['REMOTE_ADDR']);
+		$account->setLastVisit(time());
 
 		self::$currentSession = $session;
 		self::$currentUser = $account;
