@@ -82,7 +82,7 @@ class Database {
 	}
 
 	public static function getAllGroups() {
-		$sql = 'SELECT * FROM moodclap_groups WHERE GroupID = ?;';
+		$sql = 'SELECT * FROM moodclap_groups;';
 		$list = [];
 		foreach (Database::query($sql) as $row) {
 			$group = Group::FromRow($row);
