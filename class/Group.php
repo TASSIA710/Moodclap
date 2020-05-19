@@ -1,18 +1,22 @@
 <?php
 
 class Group {
-	private $groupID, $groupName, $description, $permissions;
+	private $groupID, $groupNameID, $groupName, $description, $permissions, $sortDisplay, $sortPermission;
 
 	/* Constructor */
-	public function __construct($groupID, $groupName, $description, $permissions) {
+	public function __construct($groupID, $groupNameID, $groupName, $description, $permissions, $sortDisplay, $sortPermission) {
 		$this->groupID = $groupID;
+		$this->groupNameID = $groupNameID;
 		$this->groupName = $groupName;
 		$this->description = $description;
 		$this->permissions = $permissions;
+		$this->sortDisplay = $sortDisplay;
+		$this->sortPermission = $sortPermission;
 	}
 
 	public static function FromRow($row) {
-		return new Group($row['GroupID'], $row['GroupName'], $row['Description'], json_decode($row['Permissions'], true));
+		return new Group($row['GroupID'], $row['GroupNameID'], $row['GroupName'], $row['Description'], json_decode($row['Permissions'], true),
+				$row['SortDisplay'], $row['SortPermission']);
 	}
 
 	public static function getDefault() {
@@ -26,11 +30,33 @@ class Group {
 
 
 
+
+
 	/* Generic */
 	public function getID() {
 		return $this->groupID;
 	}
 	/* Generic */
+
+
+
+
+
+	/* Group Name ID */
+	public function getNameID() {
+		return $this->groupNameID;
+	}
+
+	public function setNameID($groupNameID, $noUpdate = false) {
+		$this->groupNameID = $groupNameID;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_groups SET GroupNameID = ? WHERE GroupID = ?;';
+		Database::prepare($sql, [$groupNameID, $this->getID()]);
+	}
+	/* Group Name ID */
+
+
 
 
 
@@ -44,9 +70,11 @@ class Group {
 		if ($noUpdate) return;
 
 		$sql = 'UPDATE moodclap_groups SET GroupName = ? WHERE GroupID = ?;';
-		Database::prepare($sql, [$this->getID(), $groupName]);
+		Database::prepare($sql, [$groupName, $this->getID()]);
 	}
 	/* Group Name */
+
+
 
 
 
@@ -60,9 +88,11 @@ class Group {
 		if ($noUpdate) return;
 
 		$sql = 'UPDATE moodclap_groups SET Description = ? WHERE GroupID = ?;';
-		Database::prepare($sql, [$this->getID(), $description]);
+		Database::prepare($sql, [$description, $this->getID()]);
 	}
 	/* Description */
+
+
 
 
 
@@ -116,12 +146,53 @@ class Group {
 
 
 
+
+
+	/* Sort Display */
+	public function getSortDisplay() {
+		return $this->sortDisplay;
+	}
+
+	public function setSortDisplay($sortDisplay, $noUpdate = false) {
+		$this->sortDisplay = $sortDisplay;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_groups SET SortDisplay = ? WHERE GroupID = ?;';
+		Database::prepare($sql, [$sortDisplay, $this->getID()]);
+	}
+	/* Sort Display */
+
+
+
+
+
+	/* Sort Permission */
+	public function getSortPermission() {
+		return $this->sortPermission;
+	}
+
+	public function setSortPermission($sortPermission, $noUpdate = false) {
+		$this->sortPermission = $sortPermission;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_groups SET SortPermission = ? WHERE GroupID = ?;';
+		Database::prepare($sql, [$sortPermission, $this->getID()]);
+	}
+	/* Sort Permission */
+
+
+
+
+
 	/* Push DB */
 	public function pushDB() {
-		$sql = 'UPDATE moodclap_groups SET GroupName = ?, Description = ?, Permissions = ? WHERE GroupID = ?;';
-		Database::prepare($sql, [$this->getName(), $this->getDescription(), $this->getPermissionJSON(), $this->getID()]);
+		$sql = 'UPDATE moodclap_groups SET GroupNameID = ?, GroupName = ?, Description = ?, Permissions = ?, SortDisplay = ?, SortPermission = ? WHERE GroupID = ?;';
+		Database::prepare($sql, [$this->getNameID(), $this->getName(), $this->getDescription(), $this->getPermissionJSON(),
+				$this->getSortDisplay(), $this->getSortPermission(), $this->getID()]);
 	}
 	/* Push DB */
+
+
 
 
 
@@ -132,9 +203,12 @@ class Group {
 		foreach (Database::prepare($sql, [$this->getID()]) as $row) $group = $row;
 		if ($group == null) return false;
 
+		$his->setNameID($group['GroupNameID'], true);
 		$this->setName($group['GroupName'], true);
 		$this->setDescription($group['Description'], true);
 		$this->setPermissionJSON($group['Permissions'], true);
+		$this->setSortDisplay($group['SortDisplay'], true);
+		$this->setSortPermission($group['SortPermission'], true);
 		return true;
 	}
 	/* Pull DB */

@@ -15,10 +15,13 @@ CREATE TABLE IF NOT EXISTS `moodclap_accounts` (
 -- Create 'moodclap_groups'
 CREATE TABLE IF NOT EXISTS `moodclap_groups` (
 	`GroupID` BIGINT AUTO_INCREMENT,
+	`GroupNameID` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
 	`GroupName` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
 	`Description` TEXT CHARACTER SET utf8 COLLATE utf8_bin,
 	`Permissions` LONGTEXT CHARACTER SET utf8 COLLATE utf8_bin,
-	PRIMARY KEY (`GroupID`)
+	`SortDisplay` INT DEFAULT 0,
+	`SortPermission` INT DEFAULT 0,
+	PRIMARY KEY (`GroupID`), UNIQUE (`GroupNameID`)
 );
 
 
