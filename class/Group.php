@@ -105,8 +105,22 @@ class Group {
 		return json_encode($this->getPermissions());
 	}
 
+	public function getPermission($permission) {
+		if (isset($this->getPermissions()[$permission])) return $this->getPermissions()[$permission];
+		if ($permission == '*') return false;
+		$permission = explode('.', $permission);
+		if ($permission[count($permission) - 1] == '*') {
+			unset($permission[count($permission) - 1]);
+			$permission[count($permission) - 1] = '*';
+		} else {
+			$permission[count($permission) - 1] = '*';
+		}
+		return $this->getPermission(join('.', $permission));
+	}
+
 	public function hasPermission($permission) {
-		return isset($this->getPermissions()[$permission]) && $this->getPermissions()[$permission] !== false;
+		$v = $this->getPermission($permission);
+		return $v !== null && $v !== false;
 	}
 
 	public function setPermission($permission, $value, $noUpdate = false) {
