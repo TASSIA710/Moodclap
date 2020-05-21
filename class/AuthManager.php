@@ -33,6 +33,15 @@ class AuthManager {
 	public static function getCurrentSession() {
 		return self::$currentSession;
 	}
+
+	public static function hasPermission($permission) {
+		if (self::isLoggedIn()) {
+			return self::getCurrentUser()->getGroup()->hasPermission($permission);
+		} else {
+			// TODO: Implement guest group
+			return false;
+		}
+	}
 	/* Getters */
 
 
