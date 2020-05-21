@@ -5,6 +5,8 @@ class Database {
 	private static $cachedAccounts = [];
 	private static $cachedGroups = [];
 	private static $db = null;
+	private static $queryCount = 0;
+	private static $queryTime = 0;
 
 
 
@@ -15,13 +17,23 @@ class Database {
 	}
 
 	public static function query($sql) {
-		return Database::$db->query($sql);
+		$start = microtime(true);
+		$res = Database::$db->query($sql);
+		$end = microtime(true);
+		self::$queryTime += ($end - $start);
+		self::$queryCount++;
+		return $res;
 	}
 
 	public static function prepare($sql, $data) {
+		$start = microtime(true);
 		$q = Database::$db->prepare($sql);
 		$q->execute($data);
-		return $q->fetchAll();
+		$res = $q->fetchAll();
+		$end = microtime(true);
+		self::$queryTime += ($end - $start);
+		self::$queryCount++;
+		return $res;
 	}
 
 	public static function lastInsert() {
@@ -124,5 +136,19 @@ class Database {
 		Database::prepare($sql, [$token]);
 	}
 	/* Sessions */
+
+
+
+
+
+	/* Statistics */
+	public static function getQueryTime() {
+		return self::$queryTime;
+	}
+
+	public static function getQueryCount() {
+		return self::$queryCount;
+	}
+	/* Statistics */
 
 }
