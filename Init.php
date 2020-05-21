@@ -1,6 +1,6 @@
 <?php
 
-$MOODCLAP_START = microtime(true);
+$MOODCLAP_START = microtime(true) * 1000;
 
 // Load core
 include('core/Constants.php');

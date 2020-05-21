@@ -17,20 +17,20 @@ class Database {
 	}
 
 	public static function query($sql) {
-		$start = microtime(true);
+		$start = microtime(true) * 1000;
 		$res = Database::$db->query($sql);
-		$end = microtime(true);
+		$end = microtime(true) * 1000;
 		self::$queryTime += ($end - $start);
 		self::$queryCount++;
 		return $res;
 	}
 
 	public static function prepare($sql, $data) {
-		$start = microtime(true);
+		$start = microtime(true) * 1000;
 		$q = Database::$db->prepare($sql);
 		$q->execute($data);
 		$res = $q->fetchAll();
-		$end = microtime(true);
+		$end = microtime(true) * 1000;
 		self::$queryTime += ($end - $start);
 		self::$queryCount++;
 		return $res;
