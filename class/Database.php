@@ -93,6 +93,18 @@ class Database {
 		return $group;
 	}
 
+	public static function getGroupByNameID($id) {
+		// TODO: Check cache
+		$sql = 'SELECT * FROM moodclap_groups WHERE GroupNameID = ?;';
+		$group = null;
+		foreach (Database::prepare($sql, [$id]) as $row) $group = $row;
+		if ($group == null) return null;
+
+		$group = Group::FromRow($group);
+		self::$cachedGroups[$group->getID()] = $group;
+		return $group;
+	}
+
 	public static function getAllGroups() {
 		$sql = 'SELECT * FROM moodclap_groups ORDER BY SortDisplay;';
 		$list = [];
