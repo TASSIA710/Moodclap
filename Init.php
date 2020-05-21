@@ -1,5 +1,7 @@
 <?php
 
+$MOODCLAP_START = microtime(true);
+
 // Load core
 include('core/Constants.php');
 include('Configuration.php');
