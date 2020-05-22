@@ -4,7 +4,7 @@ const CONFIG = [
 
 	/* == -- Debugging -- == */
 	'debug_log_access'	=> false,
-	'debug_log_sql'		=> true,
+	'debug_log_sql'		=> false,
 	/* == -- Debugging -- == */
 
 
