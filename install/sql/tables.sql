@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `moodclap_groups` (
 	`Permissions` LONGTEXT CHARACTER SET utf8 COLLATE utf8_bin,
 	`SortDisplay` INT DEFAULT 0,
 	`SortPermission` INT DEFAULT 0,
-	PRIMARY KEY (`GroupID`), UNIQUE (`GroupNameID`)
+	PRIMARY KEY (`GroupID`), UNIQUE (`GroupNameID`, `GroupName`)
 );
 
 
