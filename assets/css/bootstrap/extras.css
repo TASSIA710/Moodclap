@@ -1,4 +1,5 @@
 
+/* Shadows */
 .navbar {
 	box-shadow: 0 0 4px black;
 }
@@ -10,3 +11,4 @@
 #header_stats {
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
+/* Shadows */
