@@ -1,4 +1,27 @@
 
+-- Create 'moodclap_access'
+CREATE TABLE IF NOT EXISTS `moodclap_access` (
+	`AccessID` BIGINT AUTO_INCREMENT,
+	`AccessRay` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`SessionID` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+	`AccountID` BIGINT NULL,
+	`Timestamp` BIGINT,
+	`UserAgent` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`RequestMethod` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`RequestURI` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`RequestQuery` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`Connection` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`Referer` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`Address` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`AddressPort` INT,
+	`Protocol` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`ServerSoftware` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`ServerName` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`Gateway` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	PRIMARY KEY (`AccessID`), INDEX (`AccountID`)
+);
+
+
 -- Create 'moodclap_accounts'
 CREATE TABLE IF NOT EXISTS `moodclap_accounts` (
 	`AccountID` BIGINT AUTO_INCREMENT,
@@ -9,7 +32,6 @@ CREATE TABLE IF NOT EXISTS `moodclap_accounts` (
 	`GroupID` BIGINT DEFAULT 1,
 	PRIMARY KEY (`AccountID`), UNIQUE (`Username`), INDEX (`GroupID`)
 );
-
 
 
 -- Create 'moodclap_groups'
@@ -25,7 +47,6 @@ CREATE TABLE IF NOT EXISTS `moodclap_groups` (
 );
 
 
-
 -- Create 'moodclap_sessions'
 CREATE TABLE IF NOT EXISTS `moodclap_sessions` (
 	`Token` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
@@ -36,10 +57,8 @@ CREATE TABLE IF NOT EXISTS `moodclap_sessions` (
 );
 
 
-
 -- Truncate tables, to avoid collisions with the auto increment primary key function.
 TRUNCATE `moodclap_groups`;
-
 
 
 -- Insert 'Member' group
@@ -52,7 +71,6 @@ INSERT INTO `moodclap_groups` (GroupID, GroupNameID, GroupName, Description, Per
 	99,
 	99
 );
-
 
 
 -- Insert 'System Administrator' group
