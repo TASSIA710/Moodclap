@@ -8,6 +8,8 @@ class Database {
 	private static $queryCount = 0;
 	private static $queryTime = 0;
 
+	public static $queryHistory = [];
+
 
 
 	/* Generic */
@@ -18,8 +20,14 @@ class Database {
 
 	public static function query($sql) {
 		$start = microtime(true) * 1000;
+
+		if (CONFIG['debug_log_sql']) {
+			self::$queryHistory[count(self::$queryHistory)] = $sql;
+		}
+
 		$res = Database::$db->query($sql);
 		$end = microtime(true) * 1000;
+
 		self::$queryTime += ($end - $start);
 		self::$queryCount++;
 		return $res;
@@ -27,10 +35,24 @@ class Database {
 
 	public static function prepare($sql, $data) {
 		$start = microtime(true) * 1000;
+
+		if (CONFIG['debug_log_sql']) {
+			$sql2 = $sql;
+			foreach ($data as $e) {
+				if (is_numeric($e)) {
+					$sql2 = Utility::replaceFirst('?', $e, $sql2);
+				} else {
+					$sql2 = Utility::replaceFirst('?', '\'' . $e . '\'', $sql2);
+				}
+			}
+			self::$queryHistory[count(self::$queryHistory)] = $sql2;
+		}
+
 		$q = Database::$db->prepare($sql);
 		$q->execute($data);
 		$res = $q->fetchAll();
 		$end = microtime(true) * 1000;
+
 		self::$queryTime += ($end - $start);
 		self::$queryCount++;
 		return $res;

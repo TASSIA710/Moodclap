@@ -27,3 +27,17 @@ AuthManager::initialize();
 // Load the app
 include('app/AppConfig.php');
 include('app/AppCore.php');
+
+
+
+// Cleanup
+register_shutdown_function(function() {
+
+	$data = "\n";
+	$data .= '-- ' . Utility::getSessionID() . ' | ' . date('r') . "\n";
+	foreach (Database::$queryHistory as $sql) {
+		$data .= $sql . "\n";
+	}
+	file_put_contents(__DIR__ . '/logs/queries.sql', $data, FILE_APPEND | LOCK_EX);
+
+});

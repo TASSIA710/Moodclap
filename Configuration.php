@@ -2,10 +2,17 @@
 
 const CONFIG = [
 
-	/* == -- Generic -- == */
+	/* == -- Debugging -- == */
+	'debug_log_access'	=> false,
+	'debug_log_sql'		=> true,
+	/* == -- Debugging -- == */
+
+
+
+	/* == -- Cookies -- == */
 	'cookie_duration' =>	60 * 60 * 24 * 30,
 	'cookie_domain' =>		'example.com',
-	/* == -- Generic -- == */
+	/* == -- Cookies -- == */
 
 
 
@@ -21,7 +28,7 @@ const CONFIG = [
 	'db_port' =>		3306,
 	'db_database' =>	'database',
 	'db_username' =>	'username',
-	'db_password' =>	'password'
+	'db_password' =>	'password',
 	/* == -- Database Configuration -- == */
 
 ];
