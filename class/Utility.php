@@ -36,6 +36,27 @@ class Utility {
 		if ($check === '') return true;
 		return substr($str, -strlen($check)) === $check;
 	}
+
+	public static function replaceFirst($from, $to, $content) {
+	    $from = '/' . preg_quote($from, '/') . '/';
+	    return preg_replace($from, $to, $content, 1);
+	}
 	/* String Utility */
+
+
+
+	/* Access ID */
+	private static $sessionID = null;
+
+	public static function getSessionID() {
+		if (self::$sessionID != null) return self::$sessionID;
+		if (AuthManager::isLoggedIn()) {
+			self::$sessionID = uniqid(AuthManager::getCurrentUser()->getID() . '-', true);
+		} else {
+			self::$sessionID = uniqid('guest-', true);
+		}
+		return self::$sessionID;
+	}
+	/* Access ID */
 
 }
