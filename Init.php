@@ -2,6 +2,9 @@
 
 $MOODCLAP_START = microtime(true) * 1000;
 
+// TODO: We should probably consider loading ALL groups at the start and then looking at the cache
+// instead of querying the database again multiple times.
+
 // Load core
 include('core/Constants.php');
 include('Configuration.php');
