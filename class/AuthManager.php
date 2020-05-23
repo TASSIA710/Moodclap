@@ -15,10 +15,10 @@ class AuthManager {
 		if ($account == null) return; // TODO: Handle this error
 
 		$session->setLastLogin(time());
-		$session->setLastIP($_SERVER['REMOTE_ADDR']);
+		$session->setLastIP($_SERVER['REMOTE_ADDR'] . ':' . $_SERVER['REMOTE_PORT']);
 		$session->setUserAgent($_SERVER['HTTP_USER_AGENT']);
 		$account->setLastVisit(time());
-		$account->setLastIP($_SERVER['REMOTE_ADDR']);
+		$account->setLastIP($_SERVER['REMOTE_ADDR'] . ':' . $_SERVER['REMOTE_PORT']);
 		// TODO: Optimize this, merge it into a single query
 
 		self::$currentSession = $session;
