@@ -1,21 +1,23 @@
 <?php
 
 class Account {
-	private $accountid, $username, $password, $groupID, $firstVisit, $lastVisit, $flags;
+	private $accountid, $username, $password, $groupID, $firstVisit, $lastVisit, $lastIP, $flags;
 
 	/* Constructor */
-	public function __construct($accountid, $username, $password, $groupID, $firstVisit, $lastVisit, $flags) {
+	public function __construct($accountid, $username, $password, $groupID, $firstVisit, $lastVisit, $lastIP, $flags) {
 		$this->accountid = $accountid;
 		$this->username = $username;
 		$this->password = $password;
 		$this->groupID = $groupID;
 		$this->firstVisit = $firstVisit;
 		$this->lastVisit = $lastVisit;
+		$this->lastIP = $lastIP;
 		$this->flags = $flags;
 	}
 
 	public static function FromRow($row) {
-		return new Account($row['AccountID'], $row['Username'], $row['Password'], $row['GroupID'], $row['FirstVisit'], $row['LastVisit'], $row['Flags']);
+		return new Account($row['AccountID'], $row['Username'], $row['Password'], $row['GroupID'], $row['FirstVisit'],
+				$row['LastVisit'], $row['LastIP'], $row['Flags']);
 	}
 	/* Constructor */
 
@@ -114,6 +116,22 @@ class Account {
 
 
 
+	/* Last IP */
+	public function getLastIP() {
+		return $this->lastIP;
+	}
+
+	public function setLastIP($lastIP, $noUpdate = false) {
+		$this->lastIP = $lastIP;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_accounts SET LastIP = ? WHERE AccountID = ?;';
+		Database::prepare($sql, [$lastIP, $this->getID()]);
+	}
+	/* Last IP */
+
+
+
 	/* Flags */
 	public function getFlags() {
 		return $this->flags;
@@ -132,9 +150,9 @@ class Account {
 
 	/* Push DB */
 	public function pushDB() {
-		$sql = 'UPDATE moodclap_accounts SET Username = ?, Password = ?, GroupID = ?, FirstVisit = ?, LastVisit = ?, Flags = ? WHERE AccountID = ?;';
+		$sql = 'UPDATE moodclap_accounts SET Username = ?, Password = ?, GroupID = ?, FirstVisit = ?, LastVisit = ?, LastIP = ?, Flags = ? WHERE AccountID = ?;';
 		Database::prepare($sql, [$this->getUsername(), $this->getPassword(), $this->getGroupID(), $this->getFirstVisit(),
-				$this->getLastVisit(), $this->getFlags(), $this->getID()]);
+				$this->getLastVisit(), $this->getLastIP(), $this->getFlags(), $this->getID()]);
 	}
 	/* Push DB */
 
@@ -152,6 +170,7 @@ class Account {
 		$this->groupID = $account['GroupID'];
 		$this->firstVisit = $account['FirstVisit'];
 		$this->lastVisit = $account['LastVisit'];
+		$this->lastIP = $account['LastIP'];
 		$this->flags = $account['Flags'];
 		return true;
 	}
