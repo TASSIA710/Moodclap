@@ -1,20 +1,21 @@
 <?php
 
 class Account {
-	private $accountid, $username, $password, $groupID, $firstVisit, $lastVisit;
+	private $accountid, $username, $password, $groupID, $firstVisit, $lastVisit, $flags;
 
 	/* Constructor */
-	public function __construct($accountid, $username, $password, $groupID, $firstVisit, $lastVisit) {
+	public function __construct($accountid, $username, $password, $groupID, $firstVisit, $lastVisit, $flags) {
 		$this->accountid = $accountid;
 		$this->username = $username;
 		$this->password = $password;
 		$this->groupID = $groupID;
 		$this->firstVisit = $firstVisit;
 		$this->lastVisit = $lastVisit;
+		$this->flags = $flags;
 	}
 
 	public static function FromRow($row) {
-		return new Account($row['AccountID'], $row['Username'], $row['Password'], $row['GroupID'], $row['FirstVisit'], $row['LastVisit']);
+		return new Account($row['AccountID'], $row['Username'], $row['Password'], $row['GroupID'], $row['FirstVisit'], $row['LastVisit'], $row['Flags']);
 	}
 	/* Constructor */
 
@@ -113,11 +114,27 @@ class Account {
 
 
 
+	/* Flags */
+	public function getFlags() {
+		return $this->flags;
+	}
+
+	public function setFlags($flags, $noUpdate = false) {
+		$this->flags = $flags;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_accounts SET Flags = ? WHERE AccountID = ?;';
+		Database::prepare($sql, [$flags, $this->getID()]);
+	}
+	/* Flags */
+
+
+
 	/* Push DB */
 	public function pushDB() {
-		$sql = 'UPDATE moodclap_accounts SET Username = ?, Password = ?, GroupID = ?, FirstVisit = ?, LastVisit = ? WHERE AccountID = ?;';
+		$sql = 'UPDATE moodclap_accounts SET Username = ?, Password = ?, GroupID = ?, FirstVisit = ?, LastVisit = ?, Flags = ? WHERE AccountID = ?;';
 		Database::prepare($sql, [$this->getUsername(), $this->getPassword(), $this->getGroupID(), $this->getFirstVisit(),
-				$this->getLastVisit(), $this->getID()]);
+				$this->getLastVisit(), $this->getFlags(), $this->getID()]);
 	}
 	/* Push DB */
 
@@ -135,6 +152,7 @@ class Account {
 		$this->groupID = $account['GroupID'];
 		$this->firstVisit = $account['FirstVisit'];
 		$this->lastVisit = $account['LastVisit'];
+		$this->flags = $account['Flags'];
 		return true;
 	}
 	/* Pull DB */

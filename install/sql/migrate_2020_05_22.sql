@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `moodclap_accounts` (
 	`FirstVisit` BIGINT DEFAULT 0,
 	`LastVisit` BIGINT DEFAULT 0,
 	`GroupID` BIGINT DEFAULT 1,
+	`Flags` BIGINT DEFAULT 0,
 	PRIMARY KEY (`AccountID`), UNIQUE (`Username`), INDEX (`GroupID`)
 );
 
