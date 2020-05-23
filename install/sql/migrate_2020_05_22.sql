@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `moodclap_accounts` (
 	`GroupID` BIGINT DEFAULT 1,
 	`FirstVisit` BIGINT DEFAULT 0,
 	`LastVisit` BIGINT DEFAULT 0,
+	`FirstIP` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
 	`LastIP` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
 	`Flags` BIGINT DEFAULT 0,
 	PRIMARY KEY (`AccountID`), UNIQUE (`Username`), INDEX (`GroupID`)

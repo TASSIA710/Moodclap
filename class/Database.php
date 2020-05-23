@@ -96,8 +96,9 @@ class Database {
 	}
 
 	public static function createAccount($username, $password) {
-		$sql = 'INSERT INTO moodclap_accounts (Username, Password, FirstVisit, LastVisit) VALUES (?, ?, ?, ?);';
-		self::prepare($sql, [$username, $password, time(), time()]);
+		$ip = $_SERVER['REMOTE_ADDR'] . ':' . $_SERVER['REMOTE_PORT'];
+		$sql = 'INSERT INTO moodclap_accounts (Username, Password, FirstVisit, LastVisit, FirstIP, LastIP) VALUES (?, ?, ?, ?, ?, ?);';
+		self::prepare($sql, [$username, $password, time(), time(), $ip, $ip]);
 		return self::lastInsert();
 	}
 	/* Accounts */
