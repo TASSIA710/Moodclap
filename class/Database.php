@@ -3,7 +3,7 @@
 class Database {
 	private static $cachedSessions = [];
 	private static $cachedAccounts = [];
-	private static $cachedGroups = [];
+	private static $cachedGroups = null;
 	private static $db = null;
 	private static $queryCount = 0;
 	private static $queryTime = 0;
@@ -108,51 +108,39 @@ class Database {
 
 
 	/* Groups */
-	public static function getGroup($id) {
-		if (isset(self::$cachedGroups[$id])) return self::$cachedGroups[$id];
-		$sql = 'SELECT * FROM moodclap_groups WHERE GroupID = ?;';
-		$group = null;
-		foreach (self::prepare($sql, [$id]) as $row) $group = $row;
-		if ($group == null) return null;
-
-		$group = Group::FromRow($group);
-		self::$cachedGroups[$id] = $group;
-		return $group;
-	}
-
-	public static function getGroupByNameID($id) {
-		// TODO: Check cache
-		$sql = 'SELECT * FROM moodclap_groups WHERE GroupNameID = ?;';
-		$group = null;
-		foreach (self::prepare($sql, [$id]) as $row) $group = $row;
-		if ($group == null) return null;
-
-		$group = Group::FromRow($group);
-		self::$cachedGroups[$group->getID()] = $group;
-		return $group;
-	}
-
-	public static function getGroupByName($name) {
-		// TODO: Check cache
-		$sql = 'SELECT * FROM moodclap_groups WHERE GroupName = ?;';
-		$group = null;
-		foreach (self::prepare($sql, [$name]) as $row) $group = $row;
-		if ($group == null) return null;
-
-		$group = Group::FromRow($group);
-		self::$cachedGroups[$group->getID()] = $group;
-		return $group;
-	}
-
-	public static function getAllGroups() {
+	private static function cacheGroups() {
+		self::$cachedGroups = [];
 		$sql = 'SELECT * FROM moodclap_groups ORDER BY SortDisplay;';
-		$list = [];
 		foreach (self::query($sql) as $row) {
 			$group = Group::FromRow($row);
 			self::$cachedGroups[$group->getID()] = $group;
-			$list[count($list)] = $group;
 		}
-		return $list;
+	}
+
+	public static function getGroup($id) {
+		if (self::$cachedGroups == null) self::cacheGroups();
+		return isset(self::$cachedGroups[$id]) ? self::$cachedGroups[$id] : null;
+	}
+
+	public static function getGroupByNameID($id) {
+		if (self::$cachedGroups == null) self::cacheGroups();
+		foreach (self::$cachedGroups as $group) {
+			if ($group->getNameID() == $id) return $group;
+		}
+		return null;
+	}
+
+	public static function getGroupByName($name) {
+		if (self::$cachedGroups == null) self::cacheGroups();
+		foreach (self::$cachedGroups as $group) {
+			if ($group->getName() == $name) return $group;
+		}
+		return null;
+	}
+
+	public static function getAllGroups() {
+		if (self::$cachedGroups == null) self::cacheGroups();
+		return self::$cachedGroups;
 	}
 	/* Groups */
 
