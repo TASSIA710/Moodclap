@@ -86,7 +86,7 @@ class Session {
 
 	/* Flags */
 	public function getFlags() {
-		return $flags;
+		return $this->flags;
 	}
 
 	public function setFlags($flags, $noUpdate = false) {
