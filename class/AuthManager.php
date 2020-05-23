@@ -14,12 +14,14 @@ class AuthManager {
 		$account = $session->getAccount();
 		if ($account == null) return; // TODO: Handle this error
 
-		$session->setLastLogin(time());
-		$session->setLastIP($_SERVER['REMOTE_ADDR'] . ':' . $_SERVER['REMOTE_PORT']);
-		$session->setUserAgent($_SERVER['HTTP_USER_AGENT']);
-		$account->setLastVisit(time());
-		$account->setLastIP($_SERVER['REMOTE_ADDR'] . ':' . $_SERVER['REMOTE_PORT']);
-		// TODO: Optimize this, merge it into a single query
+		$session->setLastLogin(time(), true);
+		$session->setLastIP($_SERVER['REMOTE_ADDR'] . ':' . $_SERVER['REMOTE_PORT'], true);
+		$session->setUserAgent($_SERVER['HTTP_USER_AGENT'], true);
+		$session->pushDB();
+
+		$account->setLastVisit(time(), true);
+		$account->setLastIP($_SERVER['REMOTE_ADDR'] . ':' . $_SERVER['REMOTE_PORT'], true);
+		$account->pushDB();
 
 		self::$currentSession = $session;
 		self::$currentUser = $account;
