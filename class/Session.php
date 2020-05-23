@@ -1,18 +1,19 @@
 <?php
 
 class Session {
-	private $token, $accountid, $lastLogin, $lastIP;
+	private $token, $accountid, $lastLogin, $lastIP, $userAgent;
 
 	/* Constructor */
-	public function __construct($token, $accountid, $lastLogin, $lastIP) {
+	public function __construct($token, $accountid, $lastLogin, $lastIP, $userAgent) {
 		$this->token = $token;
 		$this->accountid = $accountid;
 		$this->lastLogin = $lastLogin;
 		$this->lastIP = $lastIP;
+		$this->userAgent = $userAgent;
 	}
 
 	public static function FromRow($row) {
-		return new Session($row['Token'], $row['AccountID'], $row['LastLogin'], $row['LastIP']);
+		return new Session($row['Token'], $row['AccountID'], $row['LastLogin'], $row['LastIP'], $row['UserAgent']);
 	}
 	/* Constructor */
 
@@ -66,10 +67,26 @@ class Session {
 
 
 
+	/* User Agent */
+	public function getUserAgent() {
+		return $this->userAgent;
+	}
+
+	public function setUserAgent($userAgent, $noUpdate = false) {
+		$this->userAgent = $userAgent;
+		if ($noUpdate) return;
+
+		$sql = 'UPDATE moodclap_sessions SET UserAgent = ? WHERE Token = ?;';
+		Database::prepare($sql, [$userAgent, $this->getToken()]);
+	}
+	/* User Agent */
+
+
+
 	/* Push DB */
 	public function pushDB() {
-		$sql = 'UPDATE moodclap_sessions SET LastLogin = ?, LastIP = ? WHERE Token = ?;';
-		Database::prepare($sql, [$this->getLastLogin(), $this->getLastIP(), $this->getToken()]);
+		$sql = 'UPDATE moodclap_sessions SET LastLogin = ?, LastIP = ?, UserAgent = ? WHERE Token = ?;';
+		Database::prepare($sql, [$this->getLastLogin(), $this->getLastIP(), $this->getUserAgent(), $this->getToken()]);
 	}
 	/* Push DB */
 
@@ -84,6 +101,7 @@ class Session {
 
 		$this->setLastLogin($session['LastLogin'], true);
 		$this->setLastIP($session['LastIP'], true);
+		$this->setUserAgent($session['UserAgent'], true);
 		return true;
 	}
 	/* Pull DB */

@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `moodclap_sessions` (
 	`AccountID` BIGINT,
 	`LastLogin` BIGINT,
 	`LastIP` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
+	`UserAgent` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin,
 	PRIMARY KEY (`Token`), INDEX (`AccountID`)
 );
 
