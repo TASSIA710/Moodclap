@@ -24,11 +24,6 @@ Database::connect();
 AuthManager::initialize();
 
 
-// Load the app
-include('app/AppConfig.php');
-include('app/AppCore.php');
-
-
 
 // Cleanup
 register_shutdown_function(function() {
