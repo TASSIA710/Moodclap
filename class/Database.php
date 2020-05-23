@@ -174,7 +174,7 @@ class Database {
 	}
 
 	public static function createSession($token, $id) {
-		$session = new Session($token, $id, time(), $_SERVER['REMOTE_ADDR']);
+		$session = Session::CreateSession($token, $id);
 
 		$sql = 'INSERT INTO moodclap_sessions (Token, AccountID, LastLogin, LastIP) VALUES (?, ?, ?, ?);';
 		self::prepare($sql, [$token, $id, $session->getLastLogin(), $session->getLastIP()]);

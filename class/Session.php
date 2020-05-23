@@ -16,6 +16,10 @@ class Session {
 	public static function FromRow($row) {
 		return new Session($row['Token'], $row['AccountID'], $row['LastLogin'], $row['LastIP'], $row['UserAgent'], $row['Flags']);
 	}
+
+	public static function CreateSession($token, $id) {
+		return new Session($token, $id, time(), $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], 0);
+	}
 	/* Constructor */
 
 
