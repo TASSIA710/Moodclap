@@ -3,22 +3,22 @@
 $MOODCLAP_START = microtime(true) * 1000;
 
 // Load core
-include('core/Constants.php');
-include('Configuration.php');
+include(__DIR__ . '/core/Constants.php');
+include(__DIR__ . '/Configuration.php');
 
 // Load classes
-include('class/Account.php');
-include('class/AuthManager.php');
-include('class/Breadcrumbs.php');
-include('class/Cache.php');
-include('class/Cookies.php');
-include('class/Database.php');
-include('class/Group.php');
-include('class/Header.php');
-include('class/Markdown.php');
-include('class/Route.php');
-include('class/Session.php');
-include('class/Utility.php');
+include(__DIR__ . '/class/Account.php');
+include(__DIR__ . '/class/AuthManager.php');
+include(__DIR__ . '/class/Breadcrumbs.php');
+include(__DIR__ . '/class/Cache.php');
+include(__DIR__ . '/class/Cookies.php');
+include(__DIR__ . '/class/Database.php');
+include(__DIR__ . '/class/Group.php');
+include(__DIR__ . '/class/Header.php');
+include(__DIR__ . '/class/Markdown.php');
+include(__DIR__ . '/class/Route.php');
+include(__DIR__ . '/class/Session.php');
+include(__DIR__ . '/class/Utility.php');
 
 
 
