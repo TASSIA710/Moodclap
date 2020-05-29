@@ -74,7 +74,7 @@ class Account {
 		return Database::getGroup($this->getGroupID());
 	}
 
-	public function setGroupID($groupID) {
+	public function setGroupID($groupID, $noUpdate = false) {
 		$this->groupID = $groupID;
 		if ($noUpdate) return;
 
