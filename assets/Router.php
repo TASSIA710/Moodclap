@@ -1,5 +1,10 @@
 <?php
 
+if (!isset($resource)) {
+    http_response_code(500);
+    exit;
+}
+
 include(__DIR__ . '/../class/Utility.php');
 $FILE_PATH = __DIR__ . '/' . $resource;
 
