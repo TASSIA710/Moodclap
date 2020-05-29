@@ -4,7 +4,7 @@ function launchAJAX(script, data, callback) {
 	var xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function() {
-		if (xhttp.readyState != 4) return;
+		if (xhttp.readyState !== 4) return;
 		var res = xhttp.responseText;
 		if (xhttp.responseText.startsWith('{')) res = JSON.parse (xhttp.responseText);
 		if (!callback(res, xhttp.status, xhttp.statusText)) {
