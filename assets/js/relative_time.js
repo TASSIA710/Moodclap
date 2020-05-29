@@ -34,7 +34,7 @@ function relativeTime(timestamp) {
 	var limit = 2;
 	var concat = function(str, amount, count, limit, singleString, multiString) {
 		if (amount === 0 || count >= limit) return null;
-		if (count != 0) str += ', ';
+		if (count !== 0) str += ', ';
 		str += amount + ' ' + (amount == 1 ? singleString : multiString);
 		return str;
 	}
