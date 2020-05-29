@@ -32,7 +32,7 @@ class Route {
 	}
 
 	public static function match($methods, $path, $callback) {
-		self::any($path, function() {
+		self::any($path, function() use ($callback, $methods) {
 			if (in_array($_SERVER['REQUEST_METHOD'], $methods)) {
 				$callback();
 			} else {
