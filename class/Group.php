@@ -217,7 +217,7 @@ class Group {
 		foreach (Database::prepare($sql, [$this->getID()]) as $row) $group = $row;
 		if ($group == null) return false;
 
-		$his->setNameID($group['GroupNameID'], true);
+		$this->setNameID($group['GroupNameID'], true);
 		$this->setName($group['GroupName'], true);
 		$this->setDescription($group['Description'], true);
 		$this->setPermissionJSON($group['Permissions'], true);
