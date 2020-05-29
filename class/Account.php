@@ -1,11 +1,11 @@
 <?php
 
 class Account {
-	private $accountid, $username, $password, $groupID, $firstVisit, $lastVisit, $firstIP, $lastIP, $flags;
+	private $accountID, $username, $password, $groupID, $firstVisit, $lastVisit, $firstIP, $lastIP, $flags;
 
 	/* Constructor */
-	public function __construct($accountid, $username, $password, $groupID, $firstVisit, $lastVisit, $firstIP, $lastIP, $flags) {
-		$this->accountid = $accountid;
+	public function __construct($accountID, $username, $password, $groupID, $firstVisit, $lastVisit, $firstIP, $lastIP, $flags) {
+		$this->accountID = $accountID;
 		$this->username = $username;
 		$this->password = $password;
 		$this->groupID = $groupID;
@@ -26,7 +26,7 @@ class Account {
 
 	/* Generic */
 	public function getID() {
-		return $this->accountid;
+		return $this->accountID;
 	}
 	/* Generic */
 
