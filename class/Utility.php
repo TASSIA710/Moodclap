@@ -80,25 +80,28 @@ class Utility {
 	    }
 
 	    // Next get the name of the useragent yes seperately and for good reason
-	    if(preg_match('/MSIE/i' ,$u_agent) && !preg_match('/Opera/i', $u_agent)) {
+	    if (preg_match('/MSIE/i' ,$u_agent) && !preg_match('/Opera/i', $u_agent)) {
 	        $bname = 'Internet Explorer';
 	        $ub = 'MSIE';
-	    } elseif(preg_match('/Firefox/i', $u_agent)) {
+	    } elseif (preg_match('/Firefox/i', $u_agent)) {
 	        $bname = 'Mozilla Firefox';
 	        $ub = 'Firefox';
-	    } elseif(preg_match('/Chrome/i', $u_agent)) {
+	    } elseif (preg_match('/Chrome/i', $u_agent)) {
 	        $bname = 'Google Chrome';
 	        $ub = 'Chrome';
-	    } elseif(preg_match('/Safari/i', $u_agent)) {
+	    } elseif (preg_match('/Safari/i', $u_agent)) {
 	        $bname = 'Apple Safari';
 	        $ub = 'Safari';
-	    } elseif(preg_match('/Opera/i', $u_agent)) {
+	    } elseif (preg_match('/Opera/i', $u_agent)) {
 	        $bname = 'Opera';
 	        $ub = 'Opera';
-	    } elseif(preg_match('/Netscape/i', $u_agent)) {
+	    } elseif (preg_match('/Netscape/i', $u_agent)) {
 	        $bname = 'Netscape';
 	        $ub = 'Netscape';
-	    }
+	    } else {
+            $bname = 'Unknown';
+            $ub = 'Unknown';
+        }
 
 	    // finally get the correct version number
 	    $known = array('Version', $ub, 'other');
