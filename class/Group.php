@@ -128,7 +128,7 @@ class Group {
 		$this->setPermissions($this->permissions, $noUpdate);
 	}
 
-	public function unsetPermission($perission, $noUpdate = false) {
+	public function unsetPermission($permission, $noUpdate = false) {
 		unset($this->permissions[$permission]);
 		$this->setPermissions($this->permissions, $noUpdate);
 	}
