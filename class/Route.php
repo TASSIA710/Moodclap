@@ -4,31 +4,31 @@ class Route {
 
 	/* Methods */
 	public static function get($path, $callback) {
-		self::any(['GET'], $path, $callback);
+		self::match(['GET'], $path, $callback);
 	}
 
 	public static function post($path, $callback) {
-		self::any(['POST'], $path, $callback);
+		self::match(['POST'], $path, $callback);
 	}
 
 	public static function put($path, $callback) {
-		self::any(['PUT'], $path, $callback);
+		self::match(['PUT'], $path, $callback);
 	}
 
 	public static function patch($path, $callback) {
-		self::any(['PATCH'], $path, $callback);
+		self::match(['PATCH'], $path, $callback);
 	}
 
 	public static function delete($path, $callback) {
-		self::any(['DELETE'], $path, $callback);
+		self::match(['DELETE'], $path, $callback);
 	}
 
 	public static function options($path, $callback) {
-		self::any(['OPTIONS'], $path, $callback);
+		self::match(['OPTIONS'], $path, $callback);
 	}
 
 	public static function head($path, $callback) {
-		self::any(['HEAD'], $path, $callback);
+		self::match(['HEAD'], $path, $callback);
 	}
 
 	public static function match($methods, $path, $callback) {
