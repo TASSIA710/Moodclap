@@ -1,11 +1,11 @@
 
 /* AJAX */
 function launchAJAX(script, data, callback) {
-	var xhttp = new XMLHttpRequest();
+	const xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function() {
 		if (xhttp.readyState !== 4) return;
-		var res = xhttp.responseText;
+		let res = xhttp.responseText;
 		if (xhttp.responseText.startsWith('{')) res = JSON.parse (xhttp.responseText);
 		if (!callback(res, xhttp.status, xhttp.statusText)) {
 			showAlertDanger('AJAX Error', 'Unexpected <code>' + xhttp.status + ' - ' + xhttp.statusText + '</code> @ <code>' + script + '</code> | Please report this error.');
@@ -24,7 +24,7 @@ function launchAJAX(script, data, callback) {
 
 /* Show Alert */
 function showAlertDanger(title, description) {
-	var html = '';
+	let html = '';
 	html += '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
 		html += '<strong class="mr-2">' + title + '</strong>';
 		html += description;
@@ -50,7 +50,7 @@ function removeErrorBorder(e) {
 
 /* Utility */
 function isEmail(str) {
-	var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(str);
 }
 /* Utility */
@@ -61,18 +61,18 @@ function isEmail(str) {
 
 /* Cookies */
 function setCookie(name, value) {
-	var d = new Date();
+	const d = new Date();
 	d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
-	var expires = 'expires=' + d.toUTCString();
+	const expires = 'expires=' + d.toUTCString();
 	document.cookie = name + '=' + value + ';' + expires + ';path=/';
 }
 
 function getCookie(name) {
 	name += '=';
-	var ca = document.cookie.split(';');
-	for(var i = 0; i < ca.length; i++) {
-	  var c = ca[i];
-	  while (c.charAt(0) === ' ') {
+	const ca = document.cookie.split(';');
+	for(let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) === ' ') {
 	    c = c.substring(1);
 	  }
 	  if (c.indexOf(name) === 0) {
