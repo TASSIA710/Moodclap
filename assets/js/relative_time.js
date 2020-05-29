@@ -52,7 +52,7 @@ function relativeTime(timestamp) {
 	if (str2) { str = str2; count++; }
 
 	var i = str.lastIndexOf(', ');
-	if (i != -1) str = str.substring(0, i) + ' and ' + str.substring(i + 2);
+	if (i !== -1) str = str.substring(0, i) + ' and ' + str.substring(i + 2);
 
 	if (now > timestamp) str = str + ' ago';
 	else str = 'in ' + str;
