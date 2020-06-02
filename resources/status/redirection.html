@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<title>404 - Not Found</title>
+		<title>{code} - {name}</title>
 
 		<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
 		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -37,7 +37,7 @@
 				transform: translate(-50%, -50%);
 				background: #ffffff;
 				border-radius: 8px;
-				box-shadow: 0 0 4px 1px var(--danger);
+				box-shadow: 0 0 4px 1px var(--warning);
 				min-width: 40vw;
 				padding: 2em;
 			}
@@ -48,21 +48,17 @@
 
 	<body class="simple-page">
 		<div class="simple-container">
-			<h2 class="text-danger"><small class="fas fa-key mr-3 text-dark"></small><strong>404</strong> Not Found</h2>
+			<h2 class="text-warning"><small class="fas fa-directions mr-3 text-dark"></small><strong>{code}</strong> {name}</h2>
+			<strong class="text-muted">3×× REDIRECTION</strong>
 			<hr>
 			<span class="text-muted">
-				The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+				{message}
 				<br><br>
-				A 404 status code does not indicate whether this lack of representation is temporary or permanent; the 410 Gone status code is
-				preferred over 404 if the origin server knows, presumably through some configurable means, that the condition is likely to be permanent.
-				<br><br>
-				A 404 response is cacheable by default; i.e., unless otherwise indicated by the method definition or explicit cache controls.
-				<br><br>
-				If this error persists, please contact a System Administrator.
+				If this message persists, please contact a System Administrator.
 			</span>
 			<hr>
-			<button onclick="window.history.back();" class="btn btn-outline-danger mr-3"><i class="fas fa-backward mr-2"></i>Go Back</button>
-			<a href="/" class="btn btn-outline-danger"><i class="fas fa-home mr-2"></i>Go Home</a>
+			<button onclick="window.history.back();" class="btn btn-outline-warning mr-3"><i class="fas fa-backward mr-2"></i>Go Back</button>
+			<a href="/" class="btn btn-outline-warning"><i class="fas fa-home mr-2"></i>Go Home</a>
 		</div>
 	</body>
 

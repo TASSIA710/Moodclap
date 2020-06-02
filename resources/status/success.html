@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>{code} - {name}</title>
+
+		<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+		<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+		<style type="text/css">
+			@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+			:root {
+				--primary: #007bff;
+				--secondary: #6c757d;
+				--success: #28a745;
+				--info: #17a2b8;
+				--warning: #ffc107;
+				--danger: #dc3545;
+				--light: #f8f9fa;
+				--dark: #343a40;
+			}
+
+			body.simple-page {
+				background-color: #eeeeee;
+				font-family: 'Nunito', serif;
+			}
+
+			.simple-container {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background: #ffffff;
+				border-radius: 8px;
+				box-shadow: 0 0 4px 1px var(--success);
+				min-width: 40vw;
+				padding: 2em;
+			}
+		</style>
+	</head>
+
+
+
+	<body class="simple-page">
+		<div class="simple-container">
+			<h2 class="text-success"><small class="fas fa-check mr-3 text-dark"></small><strong>{code}</strong> {name}</h2>
+			<strong class="text-muted">2×× SUCCESS</strong>
+			<hr>
+			<span class="text-muted">
+				{message}
+			</span>
+			<hr>
+			<button onclick="window.history.back();" class="btn btn-outline-success mr-3"><i class="fas fa-backward mr-2"></i>Go Back</button>
+			<a href="/" class="btn btn-outline-success"><i class="fas fa-home mr-2"></i>Go Home</a>
+		</div>
+	</body>
+
+</html>
