@@ -142,6 +142,27 @@ class Database {
 		if (self::$cachedGroups == null) self::cacheGroups();
 		return self::$cachedGroups;
 	}
+
+	public static function createGroup($name, $nameID) {
+	    // Find sort display
+        $sort_display = 0;
+        foreach (self::getAllGroups() as $group) {
+            if ($sort_display > $group->getSortDisplay()) continue;
+            $sort_display = $group->getSortDisplay() + 1;
+        }
+
+        // Find sort permission
+        $sort_permission = 0;
+        foreach (self::getAllGroups() as $group) {
+            if ($sort_permission > $group->getSortPermission()) continue;
+            $sort_permission = $group->getSortPermission() + 1;
+        }
+
+        // Create the group
+	    $sql = 'INSERT INTO moodclap_groups (GroupNameID, GroupName, Description, Permissions, SortDisplay, SortPermission) VALUES (?, ?, ?, ?, ?, ?);';
+	    self::prepare($sql, [$nameID, $name, '', '{}', $sort_display, $sort_permission]);
+	    return new Group(self::lastInsert(), $nameID, $name, '', [], $sort_display, $sort_permission);
+    }
 	/* Groups */
 
 
