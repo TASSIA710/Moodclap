@@ -140,4 +140,81 @@ class Utility {
 	}
 	/* Browser */
 
+
+
+	/* Show Status Page */
+	public static function showStatus($code, $name='', $message='') {
+		include_once(__DIR__ . '/../resources/data/StatusCodes.php');
+		$type = 'custom';
+		if (isset(STATUS_CODES[$code])) {
+			if (!$name) $name = STATUS_CODES[$code]['name'];
+			if (!$message) $message = STATUS_CODES[$code]['message'];
+			$type = STATUS_CODES[$code]['type'];
+		}
+
+		switch ($type) {
+			case 'informational':
+				self::showInformationalStatus($code, $name, $message);
+				break;
+
+			case 'success':
+				self::showSuccessStatus($code, $name, $message);
+				break;
+
+			case 'redirection':
+				self::showRedirectionStatus($code, $name, $message);
+				break;
+
+			case 'client_error':
+				self::showClientErrorStatus($code, $name, $message);
+				break;
+
+			case 'server_error':
+				self::showServerErrorStatus($code, $name, $message);
+				break;
+
+			default:
+				self::showCustomStatus($code, $name, $message);
+				break;
+		}
+	}
+
+	private static function formatStatusPage($code, $name, $message, $content) {
+		$content = str_replace('{code}', $code, $content);
+		$content = str_replace('{name}', $name, $content);
+		$content = str_replace('{message}', $message, $content);
+		return $content;
+	}
+
+	public static function showInformationalStatus($code, $name, $message) {
+		$content = file_get_contents(__DIR__ . '/../resources/status/informational.html');
+		echo self::formatStatusPage($code, $name, $message, $content);
+	}
+
+	public static function showSuccessStatus($code, $name, $message) {
+		$content = file_get_contents(__DIR__ . '/../resources/status/success.html');
+		echo self::formatStatusPage($code, $name, $message, $content);
+	}
+
+	public static function showRedirectionStatus($code, $name, $message) {
+		$content = file_get_contents(__DIR__ . '/../resources/status/redirection.html');
+		echo self::formatStatusPage($code, $name, $message, $content);
+	}
+
+	public static function showClientErrorStatus($code, $name, $message) {
+		$content = file_get_contents(__DIR__ . '/../resources/status/client_error.html');
+		echo self::formatStatusPage($code, $name, $message, $content);
+	}
+
+	public static function showServerErrorStatus($code, $name, $message) {
+		$content = file_get_contents(__DIR__ . '/../resources/status/server_error.html');
+		echo self::formatStatusPage($code, $name, $message, $content);
+	}
+
+	public static function showCustomStatus($code, $name, $message) {
+		$content = file_get_contents(__DIR__ . '/../resources/status/custom.html');
+		echo self::formatStatusPage($code, $name, $message, $content);
+	}
+	/* Show Status Page */
+
 }
